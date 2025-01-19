@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup</title>
+    <script>
+        async function signup() {
+            const name = document.getElementById('name').value;
+            const response = await fetch('/capture-images', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name })
+            });
+
+            const result = await response.json();
+            document.getElementById('status').innerText = result.message || result.error;
+        }
+    </script>
+</head>
+<body>
+    <h1>User Signup</h1>
+    <input type="text" id="name" placeholder="Enter your name" required>
+    <button onclick="signup()">Sign Up</button>
+    <p id="status"></p>
+</body>
+</html>
